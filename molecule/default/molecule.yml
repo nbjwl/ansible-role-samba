@@ -13,10 +13,10 @@ platforms:
       - debian
     privileged: true
     env: 
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
-      no_proxy: ${no_proxy}
-    mirror: true
+      http_proxy: "${http_proxy}"
+      https_proxy: "${https_proxy}"
+      no_proxy: "${no_proxy}"
+      mirror: "${mirror}"
   - name: debian-stretch
     image: debian:stretch
     command: /sbin/init
@@ -24,10 +24,10 @@ platforms:
       - debian
     privileged: true
     env: 
-      http_proxy: ${http_proxy}
-      https_proxy: ${https_proxy}
-      no_proxy: ${no_proxy}
-    mirror: true
+      http_proxy: "${http_proxy}"
+      https_proxy: "${https_proxy}"
+      no_proxy: "${no_proxy}"
+      mirror: "${mirror}"
 provisioner:
   name: ansible
   log: true
