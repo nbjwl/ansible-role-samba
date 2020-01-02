@@ -1,0 +1,19 @@
+---
+- name: prepare
+  hosts: debian
+  tasks:
+  - name: setup mirror
+    copy:
+      src: "./mirrors/{{ inventory_hostname }}.list"
+      dest: /etc/apt/sources.list
+    become: yes
+
+  - name: clean apt
+    apt:
+      autoclean: yes
+    become: yes
+
+  - name: update apt
+    apt:
+      update_cache: yes
+    become: yes

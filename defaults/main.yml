@@ -1,0 +1,12 @@
+samba_version: 4.11.4
+samba_force_update: false
+samba_package_url: "https://download.samba.org/pub/samba/stable/{{ samba_package_name }}.tar.gz"
+
+samba_log_dir: /var/log/samba
+
+samba_smb_config: >
+  [global]
+  server role = standalone server
+  server string = Samba Server %v
+  log file = /var/log/samba/%m.log
+  max log size = 1000

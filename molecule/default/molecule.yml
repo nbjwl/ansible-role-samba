@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: debian-buster
+    image: debian:buster
+    command: /sbin/init
+    groups:
+      - debian
+    privileged: true
+    env: 
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
+      no_proxy: ${no_proxy}
+    mirror: true
+  - name: debian-stretch
+    image: debian:stretch
+    command: /sbin/init
+    groups:
+      - debian
+    privileged: true
+    env: 
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
+      no_proxy: ${no_proxy}
+    mirror: true
+provisioner:
+  name: ansible
+  # playbooks:
+  #   prepare: prepare.yml
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
