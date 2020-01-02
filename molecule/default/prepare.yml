@@ -3,7 +3,6 @@
   hosts: debian
   tasks:
   - name: setup mirror
-    block:
     copy:
       src: "./mirrors/{{ inventory_hostname }}.list"
       dest: /etc/apt/sources.list
