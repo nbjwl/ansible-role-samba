@@ -18,7 +18,7 @@ def test_hosts_file(host):
 @pytest.mark.parametrize("service", [
     "smb"
 ])
-def test_nginx_config(host, service):
-    service = host.service('smb')
+def test_service_config(host, service):
+    service = host.service(service)
     assert service.is_running
     assert service.is_enabled
