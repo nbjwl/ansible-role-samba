@@ -30,8 +30,6 @@ platforms:
     mirror: true
 provisioner:
   name: ansible
-  # playbooks:
-  #   prepare: prepare.yml
   lint:
     name: ansible-lint
 verifier:
