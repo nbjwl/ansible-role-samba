@@ -1,8 +1,17 @@
 ---
 name: Molecule Test
-on: [push]
+on: 
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - LICENSE
+  pull_request:
+    branches: 
+      - master
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -26,4 +35,4 @@ jobs:
         run: molecule test
         env:
           image: ${{ matrix.image }}
-          tag: ${{ matrix.tag }}
+          tag: ${{ matrix.tag }}  
