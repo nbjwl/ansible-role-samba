@@ -27,5 +27,3 @@ jobs:
         env:
           image: ${{ matrix.image }}
           tag: ${{ matrix.tag }}
-
-
