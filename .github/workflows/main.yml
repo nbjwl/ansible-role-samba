@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
+      matrix:
+        image: [debian]
+        tag: [buster,stretch]
     steps:
       - uses: actions/checkout@v1
         with:
@@ -20,5 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible molecule pytest docker
       - name: Test with molecule
-        run: |
-          molecule test
+        run: molecule test
+        env:
+          image: ${{ matrix.image }}
+          tag: ${{ matrix.tag }}
+
+

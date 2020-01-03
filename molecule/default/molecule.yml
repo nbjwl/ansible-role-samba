@@ -6,22 +6,11 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: debian-buster
-    image: debian:buster
+  - name: "${image}-${tag}"
+    image: "${image}:${tag}"
     command: /sbin/init
     groups:
-      - debian
-    privileged: true
-    env: 
-      http_proxy: "${http_proxy}"
-      https_proxy: "${https_proxy}"
-      no_proxy: "${no_proxy}"
-      mirror: "${mirror}"
-  - name: debian-stretch
-    image: debian:stretch
-    command: /sbin/init
-    groups:
-      - debian
+      - "${image}"
     privileged: true
     env: 
       http_proxy: "${http_proxy}"
