@@ -13,8 +13,8 @@ before_script:
   - python3 --version
 
 molecule:
-stage: test
-script:
-  - pip3 install ansible molecule docker
-  - ansible --version
-  - molecule test
+  stage: test
+  script:
+    - pip3 install ansible molecule docker
+    - ansible --version
+    - molecule test
