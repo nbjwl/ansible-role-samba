@@ -23,10 +23,10 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-  - name: Debain
+  - name: Debian
     versions:
-    - 10
-    - 9
+    - buster
+    - stretch
 
   galaxy_tags: [ samba ]
   # List tags for your role here, one per line. A tag is a keyword that describes
