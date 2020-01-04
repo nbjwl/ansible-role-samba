@@ -1,14 +1,6 @@
 ---
 name: Molecule Test
-on: 
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - README.md
-      - LICENSE
-      - 'meta/**'
-      - '.github/**'
+on:
   pull_request:
     branches: 
       - master
