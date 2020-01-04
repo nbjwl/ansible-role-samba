@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.com/nbjwl/ansible-role-samba.svg?branch=master)](https://travis-ci.com/nbjwl/ansible-role-samba)

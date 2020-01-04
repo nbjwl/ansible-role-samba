@@ -1,0 +1,17 @@
+---
+- name: prepare
+  hosts: debian
+  tasks:
+  - name: setup mirror
+    copy:
+      src: "./mirrors/{{ inventory_hostname }}.list"
+      dest: /etc/apt/sources.list
+    become: yes
+    when: lookup('env','mirror') == 'true'
+
+  - name: clean apt
+    apt:
+      autoclean: yes
+      update_cache: yes
+    become: yes
+    when: lookup('env','mirror') == 'true'

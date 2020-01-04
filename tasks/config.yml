@@ -1,0 +1,17 @@
+---
+- name: samba | smb.conf
+  copy:
+    dest: /etc/samba/smb.conf
+    content: "{{ samba_smb_config }}"
+
+- name: samba | log dir
+  file:
+    path: "{{ samba_log_dir }}"
+    state: directory
+    mode: 0660
+
+- name: samba | enable
+  service:
+    name: smb
+    enabled: yes
+    state: started

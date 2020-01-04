@@ -1,0 +1,82 @@
+---
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_version|lower|replace('/', '_') }}.yml"
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_release|lower }}.yml"
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version|lower|replace('/', '_') }}.yml"
+        - "{{ ansible_distribution|lower }}.yml"
+        - "{{ ansible_os_family|lower }}.yml"
+        - defaults.yml
+      paths:
+        - ../vars
+      skip: true
+
+- name: samba | compile dependencies
+  package:
+    state: present
+    name: "{{ samba_compile_dependencies }}"
+  retries: 3
+  delay: 5
+  register: result
+  until: result is succeeded
+
+- name: samba | spotlight dependencies
+  package:
+    state: present
+    name: "{{ samba_spotlight_dependencies }}"
+  retries: 3
+  delay: 5
+  register: result
+  until: result is succeeded
+
+- name: samba | samba package name
+  set_fact:
+    samba_package_name: samba-{{ samba_version }}
+
+- name: samba | check smdb version
+  command: smbd -V
+  changed_when: no
+  failed_when: no
+  check_mode: no
+  register: smbd_installed_version
+
+- name: samba | install from source
+  block:
+  - name: samba | clean
+    file:
+      path: "/tmp/{{ samba_package_name }}"
+      state: absent
+
+  - name: samba | unarchive
+    unarchive:
+      src: "{{ samba_package_url }}"
+      dest: "/tmp"
+      remote_src: yes
+
+  - name: samba | process number
+    command: nproc --all
+    register: nproc
+    failed_when: nproc.rc != 0
+    changed_when: no
+
+  - name: samba | make configure
+    command: "./configure {{ samba_make_options }} --jobs={{ nproc.stdout }} chdir=/tmp/{{ samba_package_name }}"
+    register: result
+    failed_when: result.rc != 0
+    changed_when: result.rc == 0
+
+  - name: samba | make
+    command: "make --jobs={{ nproc.stdout }} chdir=/tmp/{{ samba_package_name }}"
+    register: result
+    failed_when: result.rc != 0
+    changed_when: result.rc == 0
+
+  - name: samba | make install
+    command: "make install --jobs={{ nproc.stdout }} chdir=/tmp/{{ samba_package_name }}"
+    register: result
+    failed_when: result.rc != 0
+    changed_when: result.rc == 0
+    become: yes
+  when: (smbd_installed_version.rc != 0) or (smbd_installed_version.stdout | regex_replace("^.*?([0-9\.]+)$", "\\1") is version(samba_version, operator="!="))
