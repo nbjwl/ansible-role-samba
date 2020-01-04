@@ -12,6 +12,11 @@ on:
   pull_request:
     branches: 
       - master
+    paths-ignore:
+      - README.md
+      - LICENSE
+      - 'meta/**'
+      - '.github/**'
 jobs:
   test:
     runs-on: ubuntu-latest
