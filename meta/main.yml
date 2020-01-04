@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: samba
   author: Taki
   description: Install Samba from Source
 
