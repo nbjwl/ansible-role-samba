@@ -10,7 +10,8 @@ lint:
       ignore: .github
 platforms:
   - name: "${image}-${tag}"
-    image: "${image}:${tag}"
+    image: "nbjwl/molecule:${image}.${tag}"
+    pre_build_image: true
     command: /sbin/init
     groups:
       - "${image}"
