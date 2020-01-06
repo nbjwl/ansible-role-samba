@@ -1,6 +1,6 @@
 ---
 samba_compile_dependencies:
-  - '@Development Tools'
+  - "@Development Tools"
   - acl
   - attr
   - autoconf
@@ -8,7 +8,6 @@ samba_compile_dependencies:
   - bind-utils
   - binutils
   - bison
-  - chrpath
   - cups-devel
   - curl
   - dbus-devel
@@ -21,9 +20,6 @@ samba_compile_dependencies:
   - git
   - glib2-devel
   - glibc-common
-  - glibc-langpack-en
-  - glusterfs-api-devel
-  - glusterfs-devel
   - gnutls-devel
   - gpgme-devel
   - gzip
@@ -33,6 +29,7 @@ samba_compile_dependencies:
   - keyutils-libs-devel
   - krb5-devel
   - krb5-server
+  - lcov
   - libacl-devel
   - libaio-devel
   - libarchive-devel
@@ -40,10 +37,10 @@ samba_compile_dependencies:
   - libblkid-devel
   - libbsd-devel
   - libcap-devel
-  - libcephfs-devel
   - libicu-devel
-  - libnsl2-devel
+#  - libnsl2-devel
   - libpcap-devel
+  - libsemanage-python
   - libtasn1-devel
   - libtasn1-tools
   - libtirpc-devel
@@ -55,32 +52,38 @@ samba_compile_dependencies:
   - make
   - mingw64-gcc
   - ncurses-devel
+  - nettle-devel
   - openldap-devel
   - pam-devel
   - patch
-  - perl
   - perl-Archive-Tar
   - perl-ExtUtils-MakeMaker
+#  - perl-JSON-Parse
   - perl-Parse-Yapp
-  - perl-Test-Simple
+  - perl-Test-Base
+  - perl-core
   - perl-generators
   - perl-interpreter
   - pkgconfig
+  - policycoreutils-python
   - popt-devel
   - procps-ng
   - psmisc
-  - python3
-  - python3-devel
-  - python3-dns
-  - python3-gpg
-  - python3-libsemanage
-  - python3-markdown
-  - python3-policycoreutils
+  - pygpgme
+  - python-crypto
+  - python-devel
+  - python-dns
+  - python-markdown
+  - python36
+  - python36-crypto
+  - python36-devel
+  - python36-dns
+  - python36-markdown
+  - quota-devel
   - readline-devel
   - redhat-lsb
   - rng-tools
-  - rpcgen
-  - rpcsvc-proto-devel
+#  - rpcgen
   - rsync
   - sed
   - sudo
@@ -91,8 +94,7 @@ samba_compile_dependencies:
   - xfsprogs-devel
   - yum-utils
   - zlib-devel
-
-samba_centos_enablerepo: PowerTools,epel
+samba_centos_enablerepo: epel
 
 samba_spotlight_dependencies:
   - tracker

@@ -1,5 +1,5 @@
 ---
-- name: gather os specific variables
+- name: samba | gather os specific vars
   include_vars: "{{ item }}"
   with_first_found:
     - files:
@@ -8,28 +8,22 @@
         - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version|lower|replace('/', '_') }}.yml"
         - "{{ ansible_distribution|lower }}.yml"
         - "{{ ansible_os_family|lower }}.yml"
-        - defaults.yml
       paths:
         - ../vars
       skip: true
 
-- name: samba | compile dependencies
-  package:
-    state: present
-    name: "{{ samba_compile_dependencies }}"
-  retries: 3
-  delay: 5
-  register: result
-  until: result is succeeded
-
-- name: samba | spotlight dependencies
-  package:
-    state: present
-    name: "{{ samba_spotlight_dependencies }}"
-  retries: 3
-  delay: 5
-  register: result
-  until: result is succeeded
+- name: samba | install dependences
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_version|lower|replace('/', '_') }}.yml"
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_release|lower }}.yml"
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version|lower|replace('/', '_') }}.yml"
+        - "{{ ansible_distribution|lower }}.yml"
+        - "{{ ansible_os_family|lower }}.yml"
+        - "default.yml"
+      paths:
+        - ../tasks/dependences
 
 - name: samba | samba package name
   set_fact:
