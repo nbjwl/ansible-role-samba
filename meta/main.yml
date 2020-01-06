@@ -25,8 +25,12 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-    - buster
-    - stretch
+      - buster
+      - stretch
+  - name: CentOS
+    versions:
+      - 8
+      - 7
 
   galaxy_tags: [ samba ]
   # List tags for your role here, one per line. A tag is a keyword that describes

@@ -1,4 +1,3 @@
 ---
 samba_package_name: samba-{{ samba_version }}
 samba_make_options: "--sysconfdir=/etc/samba --sbindir=/usr/local/sbin --bindir=/usr/local/bin --systemd-install-services --with-systemddir=/lib/systemd/system --with-systemd {{ '--enable-spotlight' if samba_enable_spotlight else '' }}"
-
