@@ -93,4 +93,4 @@ samba_compile_dependencies:
 
 samba_spotlight_dependencies:
   - tracker
-  - libtracker-sparql-2.0-dev
+  - "{{ 'libtracker-sparql-2.0-dev' if ansible_distribution_version=10 else 'libtracker-sparql-1.0-dev' }}"

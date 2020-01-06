@@ -1,0 +1,27 @@
+- name: samba | dependences | check if epel is installed
+  shell: |
+    set -o pipefail
+    rpm -qa | grep epel-release
+  register: __epel_installed
+  changed_when: false
+  args:
+    warn: false
+  ignore_errors: yes
+
+- name: samba | dependences | install epel repository
+  yum:
+    name: epel-release
+    state: present
+    update_cache: yes
+  when:
+    - __epel_installed.rc == 1
+
+- name: samba | dependences | compile dependencies
+  yum:
+    name: "{{ samba_compile_dependencies }}"
+    enablerepo: "{{ samba_centos_enablerepo }}"
+    state: present
+  retries: 3
+  delay: 5
+  register: result
+  until: result is succeeded

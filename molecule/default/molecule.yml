@@ -12,11 +12,13 @@ platforms:
   - name: "${image}-${tag}"
     image: "nbjwl/molecule:${image}.${tag}"
     pre_build_image: true
-    command: /sbin/init
+    override_command: False
+    volumes:
+     - /sys/fs/cgroup:/sys/fs/cgroup:ro
     groups:
       - "${image}"
     privileged: true
-    env: 
+    env:
       http_proxy: "${http_proxy}"
       https_proxy: "${https_proxy}"
       no_proxy: "${no_proxy}"
