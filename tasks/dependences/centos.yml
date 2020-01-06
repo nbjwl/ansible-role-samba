@@ -19,6 +19,7 @@
 - name: samba | dependences | compile dependencies
   yum:
     name: "{{ samba_compile_dependencies }}"
+    enablerepo: "{{ samba_centos_enablerepo }}"
     state: present
   retries: 3
   delay: 5
