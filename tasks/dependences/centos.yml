@@ -1,4 +1,4 @@
-- name: check if epel is installed
+- name: samba | dependences | check if epel is installed
   shell: |
     set -o pipefail
     rpm -qa | grep epel-release
@@ -8,7 +8,7 @@
     warn: false
   ignore_errors: yes
 
-- name: install epel repository
+- name: samba | dependences | install epel repository
   yum:
     name: epel-release
     state: present
