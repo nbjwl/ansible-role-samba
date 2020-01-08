@@ -1,8 +1,8 @@
 samba_version: 4.11.4
 samba_force_update: false
 samba_package_url: "https://download.samba.org/pub/samba/stable/{{ samba_package_name }}.tar.gz"
-
 samba_log_dir: /var/log/samba
+samba_systemd_enabled: true
 samba_enable_spotlight: false
 samba_smb_config: >
   [global]
