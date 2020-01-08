@@ -27,10 +27,10 @@ galaxy_info:
     versions:
       - buster
       - stretch
-  - name: CentOS
+  - name: EL
     versions:
-      - 8
-      - 7
+      - 8(CentOS)
+      - 7(CentOS)
 
   galaxy_tags: [ samba ]
   # List tags for your role here, one per line. A tag is a keyword that describes
